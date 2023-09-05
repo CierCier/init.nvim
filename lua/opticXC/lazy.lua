@@ -13,7 +13,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     "folke/which-key.nvim",
-    "folke/tokyonight.nvim",   
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/playground",
+    "mbbill/undotree",
+
+    {
+        'folke/tokyonight.nvim',
+        lazy=false,
+    },
+
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }
@@ -34,8 +42,9 @@ require("lazy").setup({
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
             {'L3MON4D3/LuaSnip'},     -- Required
         },
-        
+
     },
+
 }, opts)
 
 
