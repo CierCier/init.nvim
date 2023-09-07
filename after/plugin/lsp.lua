@@ -14,6 +14,7 @@ lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
     'denols',
+    'clangd',
 })
 
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
