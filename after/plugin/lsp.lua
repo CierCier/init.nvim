@@ -11,9 +11,7 @@ end)
 
 
 lsp.ensure_installed({
-    'tsserver',
     'rust_analyzer',
-    'denols',
     'clangd',
 })
 
@@ -25,10 +23,31 @@ lspconfig.denols.setup {
 }
 
 lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  root_dir = lspconfig.util.root_pattern("package.json"),
-  single_file_support = false
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern("package.json"),
+    single_file_support = false
 }
+
+
+lspconfig.gopls.setup {
+    on_attach = on_attach,
+    root_dir = lspconfig.util.root_pattern("go.mod"),
+    single_file_support = true
+}
+
+lspconfig.pylsp.setup {
+    on_attach = on_attach,
+    filetypes = { "python" },
+    single_file_support = true
+}
+
+lspconfig.zls.setup {
+    on_attach = on_attach,
+    single_file_support = true,
+    root_dir = lspconfig.util.root_pattern("build.zig")
+}
+
+
 
 lsp.nvim_workspace()
 
