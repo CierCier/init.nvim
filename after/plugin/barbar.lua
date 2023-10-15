@@ -3,8 +3,8 @@ local opts = { noremap = true, silent = true }
 
 
 -- Move to previous/next
-map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+map('n', '<A-w>', '<Cmd>BufferPrevious<CR>', opts)
+map('n', '<A-e>', '<Cmd>BufferNext<CR>', opts)
 
 -- Goto buffer in position...
 map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
@@ -21,4 +21,4 @@ map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 
 map('n' , '<A-p>', '<Cmd>BufferPin<CR>', opts)
 
-map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+map('n', '<A-q>', '<Cmd>BufferClose<CR>', opts)
