@@ -13,11 +13,19 @@ end)
 lsp.ensure_installed({
 })
 
+lspconfig.clangd.setup {
+    on_attach = lsp.on_attach,
+    single_file_support = true,
+    filetypes = { "c", "cpp", "cxx" }
+
+}
+
 lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
 lspconfig.denols.setup {
     on_attach = lsp.on_attach,
     root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+    filetypes = { "javascript", "typescript" },
 }
 
 lspconfig.tsserver.setup {
@@ -27,28 +35,26 @@ lspconfig.tsserver.setup {
 }
 
 
-lspconfig.gopls.setup {
-    on_attach = lsp.on_attach,
-    root_dir = lspconfig.util.root_pattern("go.mod"),
-    single_file_support = true
-}
-
 lspconfig.pylsp.setup {
     on_attach = lsp.on_attach,
     filetypes = { "python" },
-    single_file_support = true
-}
-
-lspconfig.zls.setup {
-    on_attach = lsp.on_attach,
     single_file_support = true,
-    root_dir = lspconfig.util.root_pattern("build.zig")
+    root_dir = lspconfig.util.root_pattern("pyproject.toml"),
 }
 
-lspconfig.omnisharp.setup {
+lspconfig.rust_analyzer.setup {
     on_attach = lsp.on_attach,
-    cmd = { "omnisharp", "-v"  };
+    root_dir =  lspconfig.util.root_pattern("Cargo.toml"),
+    single_file_support = true,
+    filetypes = { "rust" },
 }
+
+lspconfig.dartls.setup {
+    on_attach = lsp.on_attach,
+    root_dir = lspconfig.util.root_pattern("pubspec.yaml"),
+    filetypes = { "dart" },
+}
+
 
 lsp.nvim_workspace()
 

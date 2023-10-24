@@ -9,7 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
+
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
     "folke/which-key.nvim",
@@ -59,8 +60,15 @@ require("lazy").setup({
         }
 
     },
+    {
+        'nvimdev/dashboard-nvim',
+        event = 'VimEnter',
+        dependencies = { { 'nvim-tree/nvim-web-devicons' } },
+    },
 
-}, opts)
+}, {
+    lazy = true,
+})
 
 
 

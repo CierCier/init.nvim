@@ -25,3 +25,4 @@ vim.opt.isfname:append("@-@")
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "90"
+
