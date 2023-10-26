@@ -19,6 +19,12 @@ require("lazy").setup({
     "mbbill/undotree",
 
     {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        opts = {}
+    },
+
+    {
         'folke/tokyonight.nvim',
         lazy=false,
     },

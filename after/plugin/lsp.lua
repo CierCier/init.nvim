@@ -15,8 +15,9 @@ lsp.ensure_installed({
 
 lspconfig.clangd.setup {
     on_attach = lsp.on_attach,
+    cmd = { "clangd", "--clang-tidy", "--completion-style=detailed", "--pch-storage=disk" },
     single_file_support = true,
-    filetypes = { "c", "cpp", "cxx" }
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 
 }
 
@@ -60,5 +61,10 @@ lsp.nvim_workspace()
 
 local cmp = require("cmp")
 
+cmp.setup({
+    mapping  = cmp.mapping.preset.insert({
+        ['<CR>'] = cmp.mapping.confirm({select = false}),
+    })
+})
 
 lsp.setup()
