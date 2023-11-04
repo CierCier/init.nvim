@@ -14,9 +14,14 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
     "folke/which-key.nvim",
+    "folke/zen-mode.nvim",
+
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/playground",
     "mbbill/undotree",
+    "github/copilot.vim",
+
+
 
     {
         'windwp/nvim-autopairs',
@@ -48,6 +53,13 @@ require("lazy").setup({
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
             {'L3MON4D3/LuaSnip'},     -- Required
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'hrsh7th/cmp-nvim-lua'},
+            {'saadparwaiz1/cmp_luasnip'},
+            {'rafamadriz/friendly-snippets'},
+
+
         },
 
     },
