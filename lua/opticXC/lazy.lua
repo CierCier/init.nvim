@@ -21,7 +21,12 @@ require("lazy").setup({
     "mbbill/undotree",
     "github/copilot.vim",
 
-
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+        }
+    },
 
     {
         'windwp/nvim-autopairs',
@@ -45,10 +50,7 @@ require("lazy").setup({
         branch = 'v2.x',
         dependencies = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {'williamboman/mason.nvim'},           -- Optional
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
+            {'neovim/nvim-lspconfig'},             -- Required 
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
@@ -58,8 +60,6 @@ require("lazy").setup({
             {'hrsh7th/cmp-nvim-lua'},
             {'saadparwaiz1/cmp_luasnip'},
             {'rafamadriz/friendly-snippets'},
-
-
         },
 
     },

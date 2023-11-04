@@ -5,7 +5,7 @@ lsp.preset("recommended")
 lsp.ensure_installed({
     'clangd',
     'tsserver',
-    'deno',
+    'denols',
     'rust_analyzer',
 })
 
@@ -50,6 +50,8 @@ lsp.set_preferences({
         info = "I"
     }
 })
+
+lsp.setup_servers({'clangd', 'rust_analyzer', 'denols', 'tsserver', 'lua_ls'})
 
 lsp.setup()
 
