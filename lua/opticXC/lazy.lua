@@ -83,6 +83,13 @@ require("lazy").setup({
         event = 'VimEnter',
         dependencies = { { 'nvim-tree/nvim-web-devicons' } },
     },
+    {
+        'Zeioth/dooku.nvim',
+        cmd = {"DookuGenerate", "DookuOpen", "DookuAutoSetup"},
+        opts = {
+
+        },
+    },
 
 }, {
     lazy = true,

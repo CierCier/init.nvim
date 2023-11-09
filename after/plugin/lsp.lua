@@ -2,21 +2,14 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-    'clangd',
-    'tsserver',
-    'denols',
-    'rust_analyzer',
-})
-
 lsp.nvim_workspace()
 
 local cmp = require("cmp")
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
 local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-u>"] = cmp.mapping.select_prev_item(cmp_select),
-    ["<C-h>"] = cmp.mapping.select_next_item(cmp_select),
+    ["<C-h>"] = cmp.mapping.select_prev_item(cmp_select),
+    ["<C-u>"] = cmp.mapping.select_next_item(cmp_select),
     ["<C-y>"] = cmp.mapping.confirm({select=true}),
     ["<C-Space>"] = cmp.mapping.complete()
 
@@ -51,10 +44,19 @@ lsp.set_preferences({
     }
 })
 
-lsp.setup_servers({'clangd', 'rust_analyzer', 'denols', 'tsserver', 'lua_ls'})
+lsp.setup_servers({
+    'clangd',
+    'rust_analyzer',
+    'denols',
+    'tsserver',
+    'lua_ls',
+    'jedi_language_server',
+    'pylyzer',
+    'hls',
+})
 
 lsp.setup()
 
 vim.diagnostic.config({
-    vurtual_text=true
+    virtual_text=true
 })
