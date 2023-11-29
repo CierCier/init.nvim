@@ -43,26 +43,6 @@ require("lazy").setup({
         'nvim-telescope/telescope.nvim', tag = '0.1.2',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-
-
-    {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        dependencies = {
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required 
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},     -- Required
-            {'hrsh7th/cmp-nvim-lsp'}, -- Required
-            {'L3MON4D3/LuaSnip'},     -- Required
-            {'hrsh7th/cmp-buffer'},
-            {'hrsh7th/cmp-path'},
-            {'hrsh7th/cmp-nvim-lua'},
-            {'saadparwaiz1/cmp_luasnip'},
-            {'rafamadriz/friendly-snippets'},
-        },
-
-    },
     {
         'romgrk/barbar.nvim',
         dependencies = {
@@ -84,11 +64,14 @@ require("lazy").setup({
         dependencies = { { 'nvim-tree/nvim-web-devicons' } },
     },
     {
-        'Zeioth/dooku.nvim',
-        cmd = {"DookuGenerate", "DookuOpen", "DookuAutoSetup"},
-        opts = {
-
-        },
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            'hrsh7th/nvim-cmp',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'L3MON4D3/LuaSnip',
+        }, 
     },
 
 }, {
