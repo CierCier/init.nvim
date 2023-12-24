@@ -19,7 +19,7 @@ end
 local servers = {
     "clangd",
     "rust_analyzer",
-    "pyright",
+    "pylsp",
     "lua_ls",
     "tsserver",
     "cssls",
