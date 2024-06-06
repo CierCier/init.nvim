@@ -23,6 +23,7 @@ local servers = {
     "lua_ls",
     "tsserver",
     "cssls",
+	"zls",
 }
 
 for _, lsp in ipairs(servers) do
