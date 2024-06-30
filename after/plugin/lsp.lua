@@ -18,11 +18,13 @@ end
 
 local servers = {
     "clangd",
-    "rust_analyzer",
-    "pylsp",
-    "lua_ls",
-    "tsserver",
     "cssls",
+	"gopls",
+	"hls",
+    "lua_ls",
+    "pylsp",
+    "rust_analyzer",
+    "tsserver",
 	"zls",
 }
 
