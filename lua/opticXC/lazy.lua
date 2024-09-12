@@ -29,12 +29,6 @@ require("lazy").setup({
     },
 
     {
-        'windwp/nvim-autopairs',
-        event = "InsertEnter",
-        opts = {}
-    },
-
-    {
         'folke/tokyonight.nvim',
         lazy=false,
     },
@@ -73,7 +67,17 @@ require("lazy").setup({
             'L3MON4D3/LuaSnip',
         }, 
     },
+	{
+		'altermo/ultimate-autopair.nvim',
+		event = { 'InsertEnter', 'CmdlineEnter' },
+		branch = 'v0.6',
 
+	},
+	{
+		'cohama/lexima.vim',
+		event = { 'InsertEnter', 'CmdlineEnter' },
+		branch = 'master',
+	}
 }, {
     lazy = true,
 })
