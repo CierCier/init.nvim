@@ -31,6 +31,7 @@ local servers = {
     "rust_analyzer",
     "ts_ls",
     "zls",
+    "jdtls"
 }
 
 for _, lsp in ipairs(servers) do
