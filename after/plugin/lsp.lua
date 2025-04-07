@@ -3,29 +3,34 @@ local luasnip = require('luasnip')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local cmp = require('cmp')
 
+local telescope = require('telescope.builtin')
+
 local on_attach = function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
-    vim.keymap.set("n", "<C-d>", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "<C-k>", function() vim.lsp.buf.workspace_sympol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "<C-d>", function() vim.lsp.buf.definition() end, { buffer = bufnr, desc = "LSP Definition", noremap = true })
+    
+    vim.keymap.set("n", "<leader>vd" , function() telescope.diagnostics() end, { buffer = bufnr, desc = "LSP Diagnostics", noremap = true })
 
 
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.refrences() end, opts)
+    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.refrences() end, { buffer = bufnr, desc = "LSP References", noremap = true })
 
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = "LSP Code Action", noremap = true })
+    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = "LSP Rename", noremap = true })
+
+    -- always enable diagnostic on hover/cursor
+
+
 end
 
 local servers = {
     "clangd",
     "cssls",
-	"gopls",
-	"hls",
+    "gopls",
+    "hls",
     "lua_ls",
     "pylsp",
     "rust_analyzer",
-	"ts_ls",
-	"zls",
+    "ts_ls",
+    "zls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -62,7 +67,15 @@ cmp.setup {
 
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = {
+	source = "if_many",
+	prefix = "●",
+    },
+    severity_sort = true,
+    float = {
+	source = "if_many",
+	border = "rounded",
+    }
 })
 
 --- Auto Format on save

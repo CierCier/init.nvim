@@ -95,6 +95,10 @@ require("lazy").setup({
 	    keys = {
 		{ "<leader>pp", "<cmd>PasteImage<cr>", desc = "Paste Image from system clipboard"   }
 	    }
+	},
+	{
+	    'RaafatTurki/hex.nvim'
+
 	}
 }, {
     lazy = true,
