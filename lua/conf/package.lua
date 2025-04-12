@@ -21,15 +21,20 @@ require("lazy").setup({
 	"nvim-treesitter/nvim-treesitter",
 	"nvim-treesitter/playground",
 	"mbbill/undotree",
-	"github/copilot.vim",
+	-- "github/copilot.vim",
+	"rcarriga/nvim-notify",
 	{ "mfussenegger/nvim-dap" },
 	{ "echasnovski/mini.nvim", version = "*" },
 	{ "RaafatTurki/hex.nvim" },
 
 	-- UI & themes
 	{
-		"folke/tokyonight.nvim",
-		lazy = false,
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			vim.cmd("colorscheme rose-pine")
+		end
+
 	},
 	{
 		"nvim-lualine/lualine.nvim",

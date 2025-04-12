@@ -12,21 +12,38 @@ local on_attach = function(client, bufnr)
 	local keymap = vim.keymap.set
 	local opts = { buffer = bufnr, noremap = true, silent = true }
 
-	keymap("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", unpack(opts) })
-	keymap("n", "gr", vim.lsp.buf.references, { desc = "Find References", unpack(opts) })
+	keymap("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to Definition", unpack(opts) })
+	keymap("n", "cr", vim.lsp.buf.references, { desc = "Find References", unpack(opts) })
 	keymap("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation", unpack(opts) })
 	keymap("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", unpack(opts) })
 
 	keymap("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol", unpack(opts) })
 	keymap("n", "<C-.>", vim.lsp.buf.code_action, { desc = "Code Action", unpack(opts) })
 
-	keymap("n", "<C-]>", vim.diagnostic.goto_next, { desc = "Next Diagnostic", unpack(opts) })
-	keymap("n", "<C-[>", vim.diagnostic.goto_prev, { desc = "Prev Diagnostic", unpack(opts) })
+	keymap("n", "<C-]>", function()
+		vim.diagnostic.jump({
+			count = -1,
+			float = true,
+		})
+	end, { desc = "Next Diagnostic", unpack(opts) })
+
+	keymap("n", "<C-[>", function()
+		vim.diagnostic.jump({
+			count = 1,
+			float = true,
+		})
+	end, { desc = "Prev Diagnostic", unpack(opts) })
 	keymap("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics", unpack(opts) })
 
-	keymap("n", "<gf", function()
+
+	keymap("n", "<C-f>", function()
 		vim.lsp.buf.format { async = true }
 	end, { desc = "Format Document", unpack(opts) })
+
+
+
+
+	_ = client
 end
 
 
@@ -39,7 +56,8 @@ local servers = {
 	"rust_analyzer",
 	"ts_ls",
 	"zls",
-	"jdtls"
+	"jdtls",
+	"somesass_ls"
 }
 
 for _, lsp in ipairs(servers) do
@@ -143,3 +161,7 @@ lspconfig.lua_ls.setup {
 		}
 	}
 }
+
+
+-- auto start COQ
+vim.cmd("COQnow -s")

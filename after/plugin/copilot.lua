@@ -1,3 +1,1 @@
-
-
-vim.keymap.set('n', "<leader>cp", vim.cmd.Copilot, { desc = "Copilot" } )
+-- vim.keymap.set('n', "<leader>cp", vim.cmd.Copilot, { desc = "Copilot" })
