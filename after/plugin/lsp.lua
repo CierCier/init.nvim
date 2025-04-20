@@ -57,7 +57,7 @@ local servers = {
 	"ts_ls",
 	"zls",
 	"jdtls",
-	"somesass_ls"
+	"somesass_ls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -160,6 +160,13 @@ lspconfig.lua_ls.setup {
 			telemetry = { enable = false },
 		}
 	}
+}
+
+
+lspconfig.qmlls.setup {
+	on_attach = on_attach,
+	capabilities = coq.lsp_ensure_capabilities(),
+	cmd = { "qmlls6", "-E" },
 }
 
 
