@@ -23,7 +23,13 @@ require("lazy").setup({
 	"mbbill/undotree",
 	-- "github/copilot.vim",
 	"rcarriga/nvim-notify",
-	{ "mfussenegger/nvim-dap" },
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio"
+		}
+	},
 	{ "echasnovski/mini.nvim", version = "*" },
 	{ "RaafatTurki/hex.nvim" },
 
@@ -138,6 +144,13 @@ require("lazy").setup({
 		},
 		-- See Commands section for default commands if you want to lazy load on them
 	},
+	{
+		"MysticalDevil/inlay-hints.nvim",
+		event = "LspAttach",
+		config = function()
+			require("inlay-hints").setup()
+		end
+	}
 
 }, {
 	lazy = true,

@@ -1,16 +1,34 @@
 local dap = require("dap")
 
 
-vim.keymap.set("n", "<leader>db", function()
+vim.keymap.set("n", "<F5>", function()
 	dap.toggle_breakpoint()
-end, { desc = "Toggle Breakpoint" }
+end, { desc = "Debug Toggle Breakpoint" }
 )
 
-
-vim.keymap.set("n", "<leader>dc", function()
+vim.keymap.set("n", "<F9>", function()
 	dap.continue()
-end, { desc = "Continue" }
+end, { desc = "Debug Continue" }
 )
+
+vim.keymap.set("n", "<C-F9>", function()
+	dap.run_to_cursor()
+end, { desc = "Debug Run to Cursor" }
+)
+
+vim.keymap.set("n", "<F8>", function()
+	dap.step_over()
+end, { desc = "Debug Step Over" }
+)
+
+vim.keymap.set("n", "<F10>", function()
+	dap.step_into()
+end, { desc = "Debug Step Into" }
+)
+
+vim.keymap.set("n", "<F11>", function()
+	dap.terminate()
+end, { desc = "Debug Terminate" })
 
 
 dap.adapters.lldb = {
@@ -18,6 +36,7 @@ dap.adapters.lldb = {
 	command = "/usr/bin/lldb-dap",
 	name = "lldb",
 }
+
 
 dap.configurations.cpp = {
 	{
@@ -63,6 +82,36 @@ dap.configurations.rust = {
 				([[command source '%s']]):format(commands_file),
 			}
 		end,
-		-- ...,
+		env = function()
+			local variables = {}
+			for k, v in pairs(vim.fn.environ()) do
+				table.insert(variables, string.format("%s=%s", k, v))
+			end
+			return variables
+		end
 	},
 }
+
+
+
+
+local dapui = require("dapui")
+dapui.setup {}
+
+vim.keymap.set("n", "<leader>D", function()
+	dapui.toggle()
+end, { desc = "Debug UI Toggle" })
+
+
+dap.listeners.before.attach.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+	dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+	dapui.close()
+end

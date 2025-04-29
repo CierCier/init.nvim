@@ -48,12 +48,9 @@ end
 
 
 local servers = {
-	"clangd",
 	"cssls",
 	"gopls",
-	"hls",
 	"pylsp",
-	"rust_analyzer",
 	"ts_ls",
 	"zls",
 	"jdtls",
@@ -61,10 +58,9 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup {
+	lspconfig[lsp].setup(coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
-		capabilities = coq.lsp_ensure_capabilities(),
-	}
+	}))
 end
 
 
@@ -134,7 +130,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- lua-lsp for Neovim
 
-lspconfig.lua_ls.setup {
+lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	capabilities = coq.lsp_ensure_capabilities(),
 
@@ -160,15 +156,78 @@ lspconfig.lua_ls.setup {
 			telemetry = { enable = false },
 		}
 	}
-}
+}))
 
-
-lspconfig.qmlls.setup {
+lspconfig.clangd.setup(coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
-	capabilities = coq.lsp_ensure_capabilities(),
-	cmd = { "qmlls6", "-E" },
-}
+	settings = {
+		clangd = {
+			InlayHints = {
+				Designators = true,
+				Enabled = true,
+				ParameterNames = true,
+				DeducedTypes = true,
+			},
+			fallbackFlags = { "-std=c++20", "-Wall", "-Werror" },
+		},
+	}
+}))
 
+lspconfig.qmlls.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	cmd = { "qmlls6", "-E" },
+}))
+
+
+lspconfig.hls.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	settings = {
+		haskell = {
+			formattingProvider = "stylish-haskell",
+		}
+	}
+}))
+
+lspconfig.rust_analyzer.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	settings = {
+		["rust-analyzer"] = {
+			inlayHints = {
+				bindingModeHints = {
+					enable = false,
+				},
+				chainingHints = {
+					enable = true,
+				},
+				closingBraceHints = {
+					enable = true,
+					minLines = 25,
+				},
+				closureReturnTypeHints = {
+					enable = "never",
+				},
+				lifetimeElisionHints = {
+					enable = "never",
+					useParameterNames = false,
+				},
+				maxLength = 25,
+				parameterHints = {
+					enable = true,
+				},
+				reborrowHints = {
+					enable = "never",
+				},
+				renderColons = true,
+				typeHints = {
+					enable = true,
+					hideClosureInitialization = false,
+					hideNamedConstructor = false,
+				},
+			},
+		}
+	}
+
+}))
 
 -- auto start COQ
 vim.cmd("COQnow -s")
