@@ -81,11 +81,6 @@ require("lazy").setup({
 		event = { "InsertEnter", "CmdlineEnter" },
 		branch = "v0.6",
 	},
-	{
-		"cohama/lexima.vim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		branch = "master",
-	},
 
 	-- Markdown rendering
 	{

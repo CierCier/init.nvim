@@ -22,14 +22,14 @@ local on_attach = function(client, bufnr)
 
 	keymap("n", "<C-]>", function()
 		vim.diagnostic.jump({
-			count = -1,
+			count = 1,
 			float = true,
 		})
 	end, { desc = "Next Diagnostic", unpack(opts) })
 
 	keymap("n", "<C-[>", function()
 		vim.diagnostic.jump({
-			count = 1,
+			count = -1,
 			float = true,
 		})
 	end, { desc = "Prev Diagnostic", unpack(opts) })
@@ -79,12 +79,13 @@ vim.diagnostic.config({
 })
 
 -- Global toggle for format-on-save
-_G.format_is_enabled = true
+-- This does not persist across sessions
+_G.format_on_save = true
 
 -- Manual command to toggle formatting
 vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
-	_G.format_is_enabled = not _G.format_is_enabled
-	vim.notify("Format on Save: " .. (_G.format_is_enabled and "Enabled" or "Disabled"))
+	_G.format_on_save = not _G.format_on_save
+	vim.notify("Format on Save: " .. (_G.format_on_save and "Enabled" or "Disabled"))
 end, { desc = "Toggle auto format on save" })
 
 -- Manual formatting command
@@ -111,7 +112,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("LspFormatOnSaveEachBuf", { clear = true }),
 			buffer = bufnr,
 			callback = function()
-				if _G.format_is_enabled then
+				if _G.format_on_save then
 					vim.lsp.buf.format {
 						async = false,
 						filter = function(c) return c.id == client.id end,
