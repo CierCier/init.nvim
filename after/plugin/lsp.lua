@@ -35,13 +35,9 @@ local on_attach = function(client, bufnr)
 	end, { desc = "Prev Diagnostic", unpack(opts) })
 	keymap("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics", unpack(opts) })
 
-
 	keymap("n", "<C-f>", function()
 		vim.lsp.buf.format { async = true }
 	end, { desc = "Format Document", unpack(opts) })
-
-
-
 
 	_ = client
 end
@@ -229,6 +225,13 @@ lspconfig.rust_analyzer.setup(coq.lsp_ensure_capabilities({
 	}
 
 }))
+
+lspconfig.asm_lsp.setup(coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	settings = {
+	}
+}))
+
 
 -- auto start COQ
 vim.cmd("COQnow -s")
