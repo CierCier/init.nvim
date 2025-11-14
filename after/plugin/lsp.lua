@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 
 
 vim.g.coq_settings = {
@@ -54,9 +53,10 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup(coq.lsp_ensure_capabilities({
+	vim.lsp.config(lsp,  coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
 	}))
+	vim.lsp.enable(lsp)
 end
 
 
@@ -127,7 +127,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- lua-lsp for Neovim
 
-lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities({
+vim.lsp.config("lua_ls", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	capabilities = coq.lsp_ensure_capabilities(),
 
@@ -154,8 +154,9 @@ lspconfig.lua_ls.setup(coq.lsp_ensure_capabilities({
 		}
 	}
 }))
+vim.lsp.enable("lua_ls")
 
-lspconfig.clangd.setup(coq.lsp_ensure_capabilities({
+vim.lsp.config("clangd", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	settings = {
 		clangd = {
@@ -169,14 +170,18 @@ lspconfig.clangd.setup(coq.lsp_ensure_capabilities({
 		},
 	}
 }))
+vim.lsp.enable("clangd")
 
-lspconfig.qmlls.setup(coq.lsp_ensure_capabilities({
+
+vim.lsp.config("qmlls", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	cmd = { "qmlls6", "-E" },
 }))
 
+vim.lsp.enable("qmlls")
 
-lspconfig.hls.setup(coq.lsp_ensure_capabilities({
+
+vim.lsp.config("hls", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	settings = {
 		haskell = {
@@ -184,8 +189,9 @@ lspconfig.hls.setup(coq.lsp_ensure_capabilities({
 		}
 	}
 }))
+vim.lsp.enable("hls")
 
-lspconfig.rust_analyzer.setup(coq.lsp_ensure_capabilities({
+vim.lsp.config("rust_analyzer", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	settings = {
 		["rust-analyzer"] = {
@@ -226,12 +232,15 @@ lspconfig.rust_analyzer.setup(coq.lsp_ensure_capabilities({
 
 }))
 
-lspconfig.asm_lsp.setup(coq.lsp_ensure_capabilities({
+vim.lsp.enable("rust_analyzer")
+
+
+vim.lsp.config("asm_lsp", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	settings = {
 	}
 }))
-
+vim.lsp.enable("asm_lsp")
 
 -- auto start COQ
 vim.cmd("COQnow -s")
