@@ -1,5 +1,3 @@
-
-
 vim.g.coq_settings = {
 	auto_start = true,
 }
@@ -53,7 +51,7 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-	vim.lsp.config(lsp,  coq.lsp_ensure_capabilities({
+	vim.lsp.config(lsp, coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
 	}))
 	vim.lsp.enable(lsp)
@@ -238,9 +236,19 @@ vim.lsp.enable("rust_analyzer")
 vim.lsp.config("asm_lsp", coq.lsp_ensure_capabilities({
 	on_attach = on_attach,
 	settings = {
+		cmd = "tinymist"
 	}
 }))
 vim.lsp.enable("asm_lsp")
+
+
+vim.lsp.config("typst_lsp", coq.lsp_ensure_capabilities({
+	on_attach = on_attach,
+	settings = {
+
+	}
+}))
+vim.lsp.enable("typst_lsp")
 
 -- auto start COQ
 vim.cmd("COQnow -s")

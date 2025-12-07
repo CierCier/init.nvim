@@ -145,7 +145,12 @@ require("lazy").setup({
 		config = function()
 			require("inlay-hints").setup()
 		end
-	}
+	},
+	{
+		"kaarmu/typst.vim",
+		ft = "typst",
+		lazy = false
+	},
 
 }, {
 	lazy = true,
