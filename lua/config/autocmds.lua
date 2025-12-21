@@ -5,13 +5,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local parent = vim.fn.fnamemodify(file_path, ":h")
 
 		-- ignore oil buffers
-
 		if file_path:match("^oil://") then
 			return
 		end
 
 		-- Ensure the parent directory exists
-
 		local ok, _ = vim.loop.fs_stat(parent)
 		if not ok then
 			vim.fn.mkdir(parent, "p")
