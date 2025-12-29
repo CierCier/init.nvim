@@ -61,16 +61,20 @@ return {
 				"somesass_ls",
 			}
 
+			local function config_lsp(server, config)
+				config.on_attach = on_attach
+				vim.lsp.config(server, coq.lsp_ensure_capabilities(config))
+				vim.lsp.enable(server)
+			end
+
 			for _, lsp in ipairs(servers) do
-				vim.lsp.config(lsp, coq.lsp_ensure_capabilities({
+				config_lsp(lsp, {
 					on_attach = on_attach,
-				}))
-                vim.lsp.enable(lsp)
+				})
 			end
 
 			-- Specific configs
-			vim.lsp.config("lua_ls", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("lua_ls", {
 				settings = {
 					Lua = {
 						runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
@@ -86,11 +90,9 @@ return {
 						telemetry = { enable = false },
 					}
 				}
-			}))
-            vim.lsp.enable("lua_ls")
+			})
 
-			vim.lsp.config("clangd", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("clangd", {
 				settings = {
 					clangd = {
 						InlayHints = {
@@ -102,25 +104,19 @@ return {
 						fallbackFlags = { "-std=c++20", "-Wall", "-Werror" },
 					},
 				}
-			}))
-            vim.lsp.enable("clangd")
+			})
 
-			vim.lsp.config("qmlls", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("qmlls", {
 				cmd = { "qmlls6", "-E" },
-			}))
-            vim.lsp.enable("qmlls")
+			})
 
-			vim.lsp.config("hls", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("hls", {
 				settings = {
 					haskell = { formattingProvider = "stylish-haskell" }
 				}
-			}))
-            vim.lsp.enable("hls")
+			})
 
-			vim.lsp.config("rust_analyzer", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("rust_analyzer", {
 				settings = {
 					["rust-analyzer"] = {
 						inlayHints = {
@@ -138,20 +134,21 @@ return {
 					}
 				}
 
-			}))
-            vim.lsp.enable("rust_analyzer")
+			})
 
-			vim.lsp.config("asm_lsp", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("sourcekit", {
+				settings = {
+					
+				}
+			})
+
+			config_lsp("asm_lsp", {
 				settings = { cmd = "tinymist" }
-			}))
-            vim.lsp.enable("asm_lsp")
+			})
 
-			vim.lsp.config("typst_lsp", coq.lsp_ensure_capabilities({
-				on_attach = on_attach,
+			config_lsp("typst_lsp", {
 				settings = {}
-			}))
-            vim.lsp.enable("typst_lsp")
+			})
 
 			vim.diagnostic.config({
 				virtual_text = {
@@ -179,38 +176,9 @@ return {
 				vim.lsp.buf.format({ async = true })
 			end, { desc = "Manually format buffer with LSP" })
 
-			-- Setup auto formatting when LSP attaches
-			vim.api.nvim_create_autocmd("LspAttach", {
-				group = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = true }),
-				callback = function(args)
-					local bufnr = args.buf
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if not client then
-						return
-					end
-
-                    if client.capabilities.documentFormattingProvider == false then
-                        return
-                    end
-
-					-- Auto-format on save if enabled
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						group = vim.api.nvim_create_augroup("LspFormatOnSaveEachBuf", { clear = true }),
-						buffer = bufnr,
-						callback = function()
-							if _G.format_on_save then
-								vim.lsp.buf.format {
-									async = false,
-									filter = function(c) return c.id == client.id end,
-								}
-							end
-						end,
-					})
-				end,
-			})
 
 			-- auto start COQ
-			-- vim.cmd("COQnow -s")
+			vim.cmd("COQnow -s")
 		end,
 	}
 }
