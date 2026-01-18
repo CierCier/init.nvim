@@ -1,13 +1,9 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	dependencies = { "nvim-treesitter/playground" },
+	dependencies = {  },
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "vimdoc", "javascript", "typescript", "c", "lua", "rust", "zig" },
-
-			sync_install = false,
-			auto_install = true,
+		require("nvim-treesitter").setup({
 
 			highlight = {
 				enable = true,
@@ -15,5 +11,6 @@ return {
 				additional_vim_regex_highlighting = false,
 			},
 		})
+
 	end,
 }
