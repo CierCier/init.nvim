@@ -44,11 +44,7 @@ return {
 
 				keymap("n", "gl", vim.diagnostic.open_float, { desc = "Line Diagnostics", unpack(opts) })
 
-				keymap("n", "<C-f>", function()
-					vim.lsp.buf.format { async = true }
-				end, { desc = "Format Document", unpack(opts) })
-
-				-- FIX: Use colon operator for method call as per deprecation advice
+				-- Enable inlay hints if supported by the server
 				if client:supports_method("textDocument/inlayHint") then
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end
@@ -118,16 +114,12 @@ return {
 				vim.lsp.enable(server)
 			end
 
-			-- Global formatting settings
-			_G.format_on_save = true
+			-- Formatting is now handled by conform.nvim
+			-- We keep a simple command to toggle auto-format globally
 			vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
-				_G.format_on_save = not _G.format_on_save
-				vim.notify("Format on Save: " .. (_G.format_on_save and "Enabled" or "Disabled"))
+				vim.g.disable_autoformat = not vim.g.disable_autoformat
+				vim.notify("Auto Format on Save: " .. (vim.g.disable_autoformat and "Disabled" or "Enabled"))
 			end, { desc = "Toggle auto format on save" })
-
-			vim.api.nvim_create_user_command("Format", function()
-				vim.lsp.buf.format({ async = true })
-			end, { desc = "Manually format buffer" })
 		end,
 	}
 }
