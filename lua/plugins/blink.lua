@@ -15,7 +15,7 @@ return {
 		},
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "jupynium" },
+			default = { "lsp", "path", "snippets", "buffer", j },
 		},
 
 		snippets = {

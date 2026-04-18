@@ -14,15 +14,6 @@ return {
 	},
 	-- Everything in opts will be passed to setup()
 	opts = {
-		-- Define your formatters
-		formatters_by_ft = {
-			lua = { "stylua" },
-			python = { "isort", "black" },
-			javascript = { { "prettierd", "prettier" } },
-			typescript = { { "prettierd", "prettier" } },
-			go = { "gofmt", "goimports" },
-			rust = { "rustfmt" },
-		},
 		-- Set up format-on-save
 		format_on_save = function(bufnr)
 			-- Disable with a global or buffer-local variable
