@@ -31,13 +31,6 @@ return {
 				enabled = true,
 			},
 		},
-		providers = {
-			jupynium = {
-				name = "Jupynium",
-				module  = "jupynium.blink_cmp",
-				score_offset = 100,
-			}
-		}
 	},
 	opts_extend = { "sources.default" },
 }

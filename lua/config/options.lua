@@ -22,4 +22,9 @@ vim.opt.isfname:append("@-@") -- allow @-@ in filenames
 
 vim.opt.termguicolors = true
 
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 vim.opt.colorcolumn = "120" -- highlight column 120
