@@ -13,17 +13,25 @@ return {
 			},
 		},
 		presets = {
-			bottom_search = true, -- use a classic bottom cmdline for search
-			command_palette = false, -- DISABLING THIS moves the cmdline from top-center to bottom
-			long_message_to_split = true,
+			bottom_search = true,
+			command_palette = false,
+			long_message_to_split = false,
 			inc_rename = false,
 			lsp_doc_border = false,
 		},
-		-- Further customize views to ensure it's pinned to the bottom
+		routes = {
+			{
+				view = "cmdline",
+				filter = {
+					event = "msg_show",
+					kind = "",
+				},
+			},
+		},
 		views = {
 			cmdline_popup = {
 				position = {
-					row = "95%", -- Move it near the bottom
+					row = "95%",
 					col = "50%",
 				},
 				size = {
@@ -34,7 +42,7 @@ return {
 			popupmenu = {
 				relative = "editor",
 				position = {
-					row = "80%", -- Position the menu above the bottom cmdline
+					row = "80%",
 					col = "50%",
 				},
 				size = {

@@ -3,12 +3,12 @@ return {
 	event = "VeryLazy",
 	opts = {
 		left = {
-			-- Oil as a sidebar if it's ever used that way
-			{
-				ft = "oil",
-				title = "Oil",
-				size = { width = 30 },
-			},
+		-- Explorer as a sidebar
+		{
+			ft = "snacks_explorer",
+			title = "Explorer",
+			size = { width = 30 },
+		},
 		},
 		bottom = {
 			{

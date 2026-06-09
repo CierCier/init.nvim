@@ -6,6 +6,17 @@ return {
 			"saghen/blink.cmp",
 		},
 		config = function()
+			-- HACK: Workaround for Neovim LSP changetracking bug #36452/#37814
+			-- send_changes_for_group doesn't guard against nil buf_state
+			-- Remove when Neovim ships the fix (beyond 0.12.2)
+			local changetracking = vim.lsp._changetracking
+			local orig = changetracking.send_changes
+			changetracking.send_changes = function(...)
+				local ok, err = pcall(orig, ...)
+				if not ok and not err:match("attempt to index local 'buf_state'") then
+					error(err)
+				end
+			end
 			-- Modern diagnostic config
 			vim.diagnostic.config({
 				virtual_text = {
@@ -26,19 +37,19 @@ return {
 				local keymap = vim.keymap.set
 				local opts = { buffer = bufnr, noremap = true, silent = true }
 
-				keymap("n", "<C-d>", vim.lsp.buf.definition, { desc = "Go to Definition", unpack(opts) })
-				keymap("n", "cr", vim.lsp.buf.references, { desc = "Find References", unpack(opts) })
+				keymap("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition", unpack(opts) })
+				keymap("n", "gr", vim.lsp.buf.references, { desc = "Find References", unpack(opts) })
 				keymap("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation", unpack(opts) })
 				keymap("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", unpack(opts) })
 
 				keymap("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename Symbol", unpack(opts) })
 				keymap("n", "<C-.>", vim.lsp.buf.code_action, { desc = "Code Action", unpack(opts) })
 
-				keymap("n", "<C-]>", function()
+				keymap("n", "]d", function()
 					vim.diagnostic.jump({ count = 1, float = true })
 				end, { desc = "Next Diagnostic", unpack(opts) })
 
-				keymap("n", "<C-[>", function()
+				keymap("n", "[d", function()
 					vim.diagnostic.jump({ count = -1, float = true })
 				end, { desc = "Prev Diagnostic", unpack(opts) })
 
@@ -70,6 +81,7 @@ return {
 				"sourcekit",
 				"asm_lsp",
 				"typst_lsp",
+				"julials",
 			}
 
 			-- Configure each server using the new Neovim native API

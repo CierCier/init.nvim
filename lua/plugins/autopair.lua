@@ -3,18 +3,18 @@ return {
 	event = "InsertEnter",
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
+		"windwp/nvim-ts-autotag",
 	},
 	config = function()
 		local npairs = require("nvim-autopairs")
 
 		npairs.setup({
-			check_ts = true, -- use treesitter to check for pairs
+			check_ts = true,
 			ts_config = {
-				lua = { "string" }, -- it will not add a pair on that treesitter node
+				lua = { "string" },
 				javascript = { "template_string" },
-				java = false, -- don't check treesitter on java
+				java = false,
 			},
-			-- FastWrap is a powerful feature to wrap existing text in pairs
 			fast_wrap = {
 				map = "<M-e>",
 				chars = { "{", "[", "(", '"', "'" },
@@ -27,8 +27,6 @@ return {
 			},
 		})
 
-		-- Integration with COQ (if you use it)
-		-- Since you use coq_nvim, we should make sure they don't fight over the same keys.
-		-- COQ handles <CR> by default, so we usually don't need to map it here.
+		require("nvim-ts-autotag").setup()
 	end,
 }

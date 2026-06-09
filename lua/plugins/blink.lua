@@ -15,7 +15,7 @@ return {
 		},
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", j },
+			default = { "lsp", "path", "snippets", "buffer" },
 		},
 
 		snippets = {
