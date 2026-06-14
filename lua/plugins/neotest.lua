@@ -2,6 +2,7 @@ return {
 	"nvim-neotest/neotest",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"nvim-neotest/nvim-nio",
 		"rouge8/neotest-rust",
 		"nvim-neotest/neotest-python",
 		"nvim-neotest/neotest-vitest",
