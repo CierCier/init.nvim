@@ -6,6 +6,10 @@ return {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
 		explorer = { enabled = true },
+		gitblame = {
+			enabled = true,
+			delay = 500,
+		},
 		notifier = {
 			enabled = true,
 			timeout = 3000,
@@ -73,7 +77,7 @@ return {
 				_G.dd = function(...) Snacks.debug.inspect(...) end
 				_G.bt = function() Snacks.debug.backtrace() end
 				vim.print = _G.dd -- Override print to use snacks for `:=` command
-				
+
 				-- Set the notify function to snacks
 				vim.notify = Snacks.notifier.notify
 			end,
