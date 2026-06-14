@@ -3,9 +3,20 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		animate = { enabled = true },
 		bigfile = { enabled = true },
-		dashboard = { enabled = true },
+		dashboard = {
+			enabled = true,
+			sections = {
+				{ section = "header" },
+				{ section = "keys", gap = 1, padding = 1 },
+				{ section = "recent_files", limit = 5, icon = " ", indent = 2 },
+				{ section = "startup" },
+			},
+		},
+		dim = { enabled = true },
 		explorer = { enabled = true },
+		image = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 3000,

@@ -81,6 +81,7 @@ return {
 				"asm_lsp",
 				"typst_lsp",
 				"julials",
+				"nil_ls",
 			}
 
 			for _, server in ipairs(servers) do
