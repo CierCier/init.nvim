@@ -6,10 +6,6 @@ return {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
 		explorer = { enabled = true },
-		gitblame = {
-			enabled = true,
-			delay = 500,
-		},
 		notifier = {
 			enabled = true,
 			timeout = 3000,

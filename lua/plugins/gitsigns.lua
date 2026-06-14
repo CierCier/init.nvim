@@ -2,6 +2,11 @@ return {
 	"lewis6991/gitsigns.nvim",
 	event = "VeryLazy",
 	opts = {
+		current_line_blame = true,
+		current_line_blame_opts = {
+			virt_text_pos = "eol",
+			delay = 500,
+		},
 		on_attach = function(bufnr)
 			local gitsigns = require('gitsigns')
 
