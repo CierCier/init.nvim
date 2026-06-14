@@ -8,7 +8,24 @@ return {
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
 	opts = {
-		keymap = { preset = "default" },
+		keymap = {
+			["<Tab>"] = {
+				function(cmp)
+					if cmp.snippet_active() then return cmp.jump_forward()
+					elseif cmp.is_menu_visible() then return cmp.accept()
+					end
+				end,
+				"fallback",
+			},
+			["<S-Tab>"] = {
+				function(cmp)
+					if cmp.snippet_active() then return cmp.jump_backward()
+					elseif cmp.is_menu_visible() then return cmp.select_prev()
+					end
+				end,
+				"fallback",
+			},
+		},
 
 		appearance = {
 			nerd_font_variant = "propo",

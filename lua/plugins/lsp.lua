@@ -83,7 +83,6 @@ return {
 				"julials",
 			}
 
-			-- Configure each server using the new Neovim native API
 			for _, server in ipairs(servers) do
 				local config = {
 					on_attach = on_attach,
@@ -120,7 +119,7 @@ return {
 				local server_opts = require('lspconfig.configs')[server] or {}
 				local default_config = server_opts.default_config or {}
 				local final_config = vim.tbl_deep_extend("force", default_config, config)
-				
+
 				vim.lsp.config(server, final_config)
 				vim.lsp.enable(server)
 			end
