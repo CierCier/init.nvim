@@ -1,0 +1,18 @@
+return {
+	"cssls",
+	"gopls",
+	"pylsp",
+	"ts_ls",
+	"zls",
+	"jdtls",
+	"somesass_ls",
+	"lua_ls",
+	"clangd",
+	"qmlls",
+	"hls",
+	"rust_analyzer",
+	"sourcekit",
+	"asm_lsp",
+	"typst_lsp",
+	"julials",
+}
