@@ -64,7 +64,24 @@ return {
 			-- Get default capabilities from blink.cmp
 			local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-			local servers = require("config.servers")
+			local servers = {
+				"cssls",
+				"gopls",
+				"pylsp",
+				"ts_ls",
+				"zls",
+				"jdtls",
+				"somesass_ls",
+				"lua_ls",
+				"clangd",
+				"qmlls",
+				"hls",
+				"rust_analyzer",
+				"sourcekit",
+				"asm_lsp",
+				"typst_lsp",
+				"julials",
+			}
 
 			-- Configure each server using the new Neovim native API
 			for _, server in ipairs(servers) do
