@@ -6,6 +6,25 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter").setup({
+			ensure_installed = {
+				"c",
+				"lua",
+				"rust",
+				"go",
+				"python",
+				"vim",
+				"vimdoc",
+				"query",
+				"javascript",
+				"typescript",
+				"html",
+				"css",
+				"toml",
+				"json",
+				"yaml",
+				"markdown",
+				"markdown_inline",
+			},
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = false,
