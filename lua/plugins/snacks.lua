@@ -19,9 +19,11 @@ return {
 					hidden = true,
 					ignored = false,
 					jump = { close = true },
+					git_status_open = true,
 					layout = {
 						preset = "sidebar",
 						preview = false,
+						border = "rounded",
 					},
 				},
 			},
