@@ -29,7 +29,6 @@ return {
 				open_on_run = "short",
 			},
 			summary = {
-				open = false,
 				mappings = {
 					attach = "a",
 					expand = { "<CR>", "<2-LeftMouse>" },
