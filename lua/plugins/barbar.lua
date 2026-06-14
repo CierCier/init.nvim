@@ -13,6 +13,8 @@ return {
 	},
 	keys = {
 		-- Move to previous/next
+		{ '<A-h>', '<Cmd>BufferPrevious<CR>', desc = "Previous Buffer" },
+		{ '<A-l>', '<Cmd>BufferNext<CR>', desc = "Next Buffer" },
 		{ '<A-w>', '<Cmd>BufferPrevious<CR>', desc = "Previous Buffer" },
 		{ '<A-e>', '<Cmd>BufferNext<CR>', desc = "Next Buffer" },
 		-- Goto buffer in position...
