@@ -17,6 +17,23 @@ return {
 		dim = { enabled = true },
 		explorer = { enabled = true },
 		image = { enabled = true },
+		indent = {
+			enabled = true,
+			indent = { char = "│" },
+			scope = { enabled = true },
+			exclude = {
+				filetypes = {
+					"help",
+					"dashboard",
+					"Trouble",
+					"trouble",
+					"lazy",
+					"notify",
+					"snacks_terminal",
+				},
+			},
+		},
+		scroll = { enabled = true },
 		notifier = {
 			enabled = true,
 			timeout = 3000,
@@ -69,6 +86,7 @@ return {
 		{ "<leader>gf", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 		{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
+		{ "<leader>rn", function() Snacks.rename.rename_file() end, desc = "Rename File" },
 		{ "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
 		{ "<A-t>",      function() Snacks.terminal() end, desc = "Toggle Terminal" },
 		{ "<c-/>",      function() Snacks.terminal() end, desc = "Toggle Terminal", mode = "t" },
