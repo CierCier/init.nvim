@@ -116,6 +116,10 @@ return {
 						}
 					}
 				elseif server == "clangd" then
+					config.cmd = {
+						"clangd",
+						"--query-driver=/nix/store/*-clang-wrapper-*/bin/clang*",
+					}
 					config.settings = {
 						clangd = {
 							InlayHints = { Enabled = true },
