@@ -27,6 +27,15 @@ return {
 			},
 		})
 
+		local function avoid_pairing_import_brace(opts)
+			if vim.bo[opts.bufnr or 0].filetype ~= "silver" then return nil end
+			local before = opts.line:sub(1, opts.col - 1)
+			if before:match("^%s*import%s+[%w_%.]+%s*$") then return false end
+		end
+		for _, rule in ipairs(npairs.get_rules("{")) do
+			rule:with_pair(avoid_pairing_import_brace, 1)
+		end
+
 		require("nvim-ts-autotag").setup()
 	end,
 }
